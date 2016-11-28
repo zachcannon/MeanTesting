@@ -1,5 +1,4 @@
-const hostname = process.env.IP;
-const port = process.env.PORT;
+const port = 8080;
 const path = require('path')
 const express = require('express');
 
