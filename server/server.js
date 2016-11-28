@@ -10,6 +10,6 @@ app.get('/',function(req, res) {
     res.sendFile(__dirname + '../client/index.html');
     res.send()
 });
-app.listen(port, hostname, () => {
-  console.log(`LOGGING: Server running at http://${hostname}:${port}/`);
+app.listen(port, 'localhost', () => {
+  console.log(`LOGGING: Server running at http://localhost:${port}/`);
 });
