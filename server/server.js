@@ -1,14 +1,16 @@
-const http = require('http');
-
 const hostname = process.env.IP;
 const port = process.env.PORT;
+const path = require('path')
+const express = require('express');
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+var app = express();
+
+app.use(express.static(path.join(__dirname, '../client')));
+
+app.get('/',function(req, res) {
+    res.sendFile(__dirname + '../client/index.html');
+    res.send()
 });
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, hostname, () => {
+  console.log(`LOGGING: Server running at http://${hostname}:${port}/`);
 });
