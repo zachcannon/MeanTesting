@@ -1,6 +1,5 @@
-const port = 8080;
-const path = require('path')
-const express = require('express');
+var path = require('path');
+var express = require('express');
 
 var app = express();
 
@@ -8,8 +7,8 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('/',function(req, res) {
     res.sendFile(__dirname + '../client/index.html');
-    res.send()
+    res.send();
 });
-app.listen(port, 'localhost', () => {
-  console.log(`LOGGING: Server running at http://localhost:${port}/`);
+app.listen(process.env.PORT, 'localhost', (np) => {
+  console.log(`LOGGING: Server running at http://localhost:${process.env.PORT}/`);
 });
