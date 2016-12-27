@@ -1,16 +1,74 @@
 <!DOCTYPE html>
-<html ng-app="app">
-    <head>
+<html ng-app="eventsApp">
+<head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
-    </head>
-    <body>
-        <h1 ng-controller="HelloWorldController">{{helloMessage}}</h1>
-        
-        <script type="text/javascript">
-            angular.module('app', []).controller('HelloWorldController', 
-                function($scope) {
-                    $scope.helloMessage = "Hello World From Angular";
-                });
-        </script>
-    </body>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <h2></h2>
+                </ul>
+            </div>
+        </div>
+        <div ng-controller="EventController" style="padding-left:20px; padding-right:20px;">
+            <img ng-src="{{event.imageUrl}}" alt="{{event.name}}" />
+            <div class="row">
+                <div class="span11">
+                    <h2>{{event.name}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span3">
+                    <div><strong>DATE: </strong>{{event.date}}</div>
+                    <div><strong>TIME: </strong>{{event.time}}</div>
+                </div>
+                <div class="span4">
+                    <address>
+                        <strong>Address:</strong><br/>
+                        {{event.location.address}}<br/>
+                        {{event.location.city}}, {{event.location.state}}
+                    </address>
+                </div>
+            </div>
+            
+            <hr />
+            <h3>Sessions</h3>
+            
+            <ul class="thumbnails">
+                <li ng-repeat="session in event.sessions">
+                    <div class="row session">
+                        <div class="span0 well votingWidget">
+                            <div class="votingButton" ng-click="upVoteSession(session)">
+                                <i class="icon-chevron-up icon-white"></i>
+                            </div>
+                            <div class="badge badge-inverse">
+                                <div>{{session.upVoteCount}}</div>
+                            </div>
+                            <div class="votingButton" ng-click="downVoteSession(session)">
+                                <i class="icon-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="well span9">
+                            <h4 class="well-title">{{session.name}}</h4>
+                            <h6 style="margin-top:-10px">{{session.creator}}</h6>
+                            <span>Duration: {{session.duration}}</span><br/>
+                            
+                            <p>{{session.abstract}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/EventController.js"></script>
+</body>
 </html>
